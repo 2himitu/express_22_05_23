@@ -1,5 +1,4 @@
 // app.js
-// app.js
 import express from "express";
 import mysql from "mysql2/promise";
 
@@ -14,21 +13,20 @@ const pool = mysql.createPool({
 });
 
 const app = express();
-
 app.use(express.json());
-
 const port = 3000;
 
 //삭제
-app.enable("/todos/:id", async (req, res) => {
+app.delete("/todos/:id", async (req, res) => {
   //const id = req.params.id;
   const { id } = req.params;
-
   const [rows] = await pool.query(
     `
     SELECT *
     FROM todo
-    `
+    where id= ?
+    `,
+    [id]
   );
 
   if (rows.length == 0) {
@@ -51,8 +49,6 @@ app.enable("/todos/:id", async (req, res) => {
 
 // 생성
 app.post("/todos", async (req, res) => {
-  const { id } = req.params;
-
   const [rows] = await pool.query(
     `
     SELECT *
