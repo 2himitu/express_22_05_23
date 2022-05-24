@@ -37,7 +37,7 @@ app.delete("/todos/:id", async (req, res) => {
   }
   const [rs] = await pool.query(
     `
-    delete form todo
+    delete fromm todo
     WHERE id = ?
     `,
     [id]
