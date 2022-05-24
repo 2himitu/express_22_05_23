@@ -37,7 +37,7 @@ app.delete("/todos/:id", async (req, res) => {
   }
   const [rs] = await pool.query(
     `
-    delete fromm todo
+    delete from todo
     WHERE id = ?
     `,
     [id]
@@ -53,8 +53,7 @@ app.post("/todos", async (req, res) => {
     `
     SELECT *
     FROM todo
-    `,
-    [id]
+    `
   );
   if (rows.length == 0) {
     res.status(404).json({
